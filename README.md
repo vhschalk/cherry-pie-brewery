@@ -1,4 +1,4 @@
-cherry-pie-brewery
-==================
+The Cherry Pie Brewery
+======================
 
-Fully automated HERMS brewery on RPi
+Fully automated HERMS brewery run from your Raspberry Pi

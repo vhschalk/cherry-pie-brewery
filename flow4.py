@@ -6,7 +6,7 @@ import RPi.GPIO as gpio # Importing RPIO module as gpio
 # Initializing GPIO ports
 boardRevision = gpio.RPI_REVISION # Clearing previous gpio port settings
 gpio.setmode(gpio.BCM) # Use real physical gpio port numbering
-gpio.setup(25, gpio.IN, pull_up_down=gpio.PUD_UP) # setting pin 22 as pull up resistor
+gpio.setup(22, gpio.IN, pull_up_down=gpio.PUD_UP) # setting pin 22 as pull up resistor
 
 
 def glycolFlow():
@@ -14,8 +14,8 @@ def glycolFlow():
   glycolErrorStopTime = glycolCurrentTime + 1
   glycolTimingPulse = 0
   while glycolCurrentTime <= glycolErrorStopTime:
-       if gpio.input(25) == True:
-            if gpio.input(25) == False:
+       if gpio.input(22) == True:
+            if gpio.input(22) == False:
                  glycolTimingPulse += 1
             else:
                  glycolCurrentTime = int(time.time())
@@ -30,8 +30,8 @@ def glycolFlow():
        glycolCount = 0
        print 'glycol count', glycolCount
        while (glycolCount < 15) and (waitTimerCountglycol <= waitTimerglycol) :
-            if gpio.input(25) == True:
-                 if gpio.input(25) == False:
+            if gpio.input(22) == True:
+                 if gpio.input(22) == False:
                       glycolCount += 1
                       print 'glycol count', glycolCount
                       waitTimerglycol = int(time.time()) + 1
@@ -39,20 +39,20 @@ def glycolFlow():
                       waitTimerCountglycol = int(time.time())
             else:
                  waitTimerCountglycol = int(time.time())
-      glycolEndTime = int(time.time())
+       glycolEndTime = int(time.time())
        print 'glycol end time', glycolEndTime
        if glycolCount == 15:
             glycolSecsPerLiters = glycolEndTime - glycolStartTime
             glycolLitersPerHour = (3600.0 / glycolSecsPerLiters) * 30
-            glycolGalPerHour = glycolLitersPerHour * 0.26417205235815
-            return glycolGalPerHour
+            #glycolGalPerHour = glycolLitersPerHour * 0.26417205235815
+            return glycolLitersPerHour
        else:
-            glycolGalPerHour = 0
-       return glycolGalPerHour
+            glycolLitersPerHour = 0
+       return glycolLitersPerHour
   else:
-       glycolGalPerHour = 0
-       return glycolGalPerHour
+       glycolLitersPerHour = 0
+       return glycolLitersPerHour
 
 while True:
-  glycolGalPerHour = glycolFlow()
-  print "glycol flow =", glycolGalPerHour, "Gal/Hour"
+  glycolLitersPerHour = glycolFlow()
+  print "flow =", glycolLitersPerHour, "l/Hour"

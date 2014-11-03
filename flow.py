@@ -61,11 +61,13 @@ while True:
             pinDelta = pinChange - lastPinChange
         if (pinDelta < 1000):
             # calculate the instantanelitersPouredous speed
-            hertz = 1000.0000 / pinDelta
+            hertz = 1000.0000 / 1
             flow = hertz / (60 * 7.5) # L/s
             litersPoured += flow * (pinDelta / 1000.0000)
-        
+    
+    print(litersPoured)
+    
     lastPinChange = pinChange
-    lastPinState = pinState
+    lastPinState = pinDelta
 
 GPIO.cleanup()

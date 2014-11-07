@@ -6,7 +6,7 @@ import time
 import RPi.GPIO as GPIO
 
 GPIO.setmode(GPIO.BCM) # use real GPIO numbering
-GPIO.setup(22,GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(17,GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
 # set up the flow meter
 flowing = False
@@ -46,7 +46,7 @@ litersPoured = 0
 # main loop
 while True:
     currentTime = int(time.time() * 1000)
-    if GPIO.input(22):
+    if GPIO.input(17):
         pinState = True
     else:
         pinState = False

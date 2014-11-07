@@ -6,9 +6,9 @@ import time
 import RPi.GPIO as GPIO
 
 GPIO.setmode(GPIO.BCM) # use real GPIO numbering
-GPIO.setup(22,GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(17,GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
-if GPIO.input(22):
+if GPIO.input(17):
 	print("flow")
 else:
 	print("no flow")

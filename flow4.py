@@ -24,23 +24,23 @@ def glycolFlow():
 
   if glycolTimingPulse != 0:
        glycolStartTime = int(time.time())
-       print 'glycol start time', glycolStartTime
+       #print 'glycol start time', glycolStartTime
        waitTimerglycol = glycolStartTime + 2
        waitTimerCountglycol = int(time.time())
        glycolCount = 0
-       print 'glycol count', glycolCount
+       #print 'glycol count', glycolCount
        while (glycolCount < 15) and (waitTimerCountglycol <= waitTimerglycol) :
             if gpio.input(22) == True:
                  if gpio.input(22) == False:
                       glycolCount += 1
-                      print 'glycol count', glycolCount
+                      #print 'glycol count', glycolCount
                       waitTimerglycol = int(time.time()) + 1
                  else:
                       waitTimerCountglycol = int(time.time())
             else:
                  waitTimerCountglycol = int(time.time())
        glycolEndTime = int(time.time())
-       print 'glycol end time', glycolEndTime
+       #print 'glycol end time', glycolEndTime
        if glycolCount == 15:
             glycolSecsPerLiters = glycolEndTime - glycolStartTime
             glycolLitersPerHour = (3600.0 / glycolSecsPerLiters) * 30

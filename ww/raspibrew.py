@@ -168,7 +168,7 @@ def getstatus(sensorNum=None):
        
 # Retrieve temperature from DS18B20 temperature sensor
 def tempData1Wire(tempSensorId):
-    
+
     pipe = Popen(["cat","/sys/bus/w1/devices/w1_bus_master1/" + tempSensorId + "/w1_slave"], stdout=PIPE)
     result = pipe.communicate()[0]
     if (result.split('\n')[0].split(' ')[11] == "YES"):
@@ -477,7 +477,7 @@ def tempControlProc(myTempSensorNum, LCD, pinNum, readOnly, paramStatus, statusQ
                                           
 if __name__ == '__main__':
     
-    os.chdir("/var/www")
+    os.chdir("/brewery/ww")
      
     call(["modprobe", "w1-gpio"])
     call(["modprobe", "w1-therm"])

@@ -2,7 +2,7 @@
 <Config>
 	<!-- Place templates (themes) in templates folder -->
 	<!-- The static folder must contain the corresponding css and js files -->
-	<Template>cherrypiebrewery_control.html</Template>
+	<Template>cherrypiebrewery_tune.html</Template>
 	<!-- Use LCD - yes or no-->
 	<Use_LCD>no</Use_LCD>
 	<!-- GPIO pin numbering scheme - choose BOARD or BCM. If something else than these are given, BCM is chosen as default. -->

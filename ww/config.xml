@@ -8,12 +8,14 @@
 	<!-- GPIO pin numbering scheme - choose BOARD or BCM. If something else than these are given, BCM is chosen as default. -->
 	<GPIO_pin_numbering_scheme>BCM</GPIO_pin_numbering_scheme>
 	<!-- Temperature Sensor Id -->
-	<!-- For Temp Control the Temp_Sensor_Id must have a corresponding GPIO Pin used -->
+	<!-- For Temp Control the Temp_Sensor_Id must have a corresponding GPIO Pin used --> 
 	<!-- for heat, otherwise the temperature sensor is only for temp readout -->
 	<!-- Repeat same element names (Temp_Sensor_Id and optional Heat_Pin) for additional temp sensors -->
-	<!-- Currently limited to 3 temp sensors but that can easily be expanded in raspibrew.py -->
+	<!-- Currently limited to 3 temp sensors but that can easily be expanded in raspibrew.py -->  
 	<Temp_Sensor_Id>28-00000607001b</Temp_Sensor_Id>
 	<Heat_Pin>27</Heat_Pin>
+	<Temp_Sensor_Id>28-000006074526</Temp_Sensor_Id>
+	<Heat_Pin>23</Heat_Pin>
 	<!-- Up to 2 GPIO pins are supported but can easily be expanded in code-->
 	<!-- Repeat <GPIO_Pin> element name -->
 	<GPIO_Pin>22</GPIO_Pin>

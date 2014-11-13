@@ -6,7 +6,6 @@
 trig_out_pin = 9
 echo_in_pin = 11
 
-<<<<<<< HEAD
 import time
 import RPi.GPIO as GPIO
 
@@ -15,7 +14,7 @@ GPIO.setwarnings(False)
 
 # use the values of the GPIO pins, and not the actual pin number
 # so if you connect to GPIO 25 which is on pin number 22, the 
-# reference in this code is 25, which is the number of the GPIO 
+# reference in this code is 25, which is the number of the GPIO
 # port and not the number of the physical pin
 GPIO.setmode(GPIO.BCM)
 
@@ -149,4 +148,3 @@ def reading(sensor):
     
     # we're no longer using the GPIO, so tell software we're done
     GPIO.cleanup()
->>>>>>> upstream/master

@@ -15,12 +15,16 @@
 	<Temp_Sensor_Id>28-00000607001b</Temp_Sensor_Id>
 	<Heat_Pin>27</Heat_Pin>
 	<Temp_Sensor_Id>28-000006074526</Temp_Sensor_Id>
+<<<<<<< HEAD
+	<Heat_Pin>10</Heat_Pin>
+=======
 	<Heat_Pin>23</Heat_Pin>
+>>>>>>> upstream/master
 	<!-- Up to 2 GPIO pins are supported but can easily be expanded in code-->
 	<!-- Repeat <GPIO_Pin> element name -->
 	<GPIO_Pin>22</GPIO_Pin>
 	<!-- <GPIO_Pin>19</GPIO_Pin> -->
 	<!-- Units C (Celsius) or F (Fahrenheit) -->
 	<!-- Note: Default is F for Android app which can switch between F and C-->
-	<Temp_Units>F</Temp_Units>
+	<Temp_Units>C</Temp_Units>
 </Config>

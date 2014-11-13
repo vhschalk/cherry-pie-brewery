@@ -2,10 +2,10 @@ import os
 import glob
 import time
 
-#import subprocess 
+print("temp start")
  
-os.system('modprobe w1-gpio')
-os.system('modprobe w1-therm')
+os.system('/sbin/modprobe w1-gpio')
+os.system('/sbin/modprobe w1-therm')
  
 base_dir = '/sys/bus/w1/devices/'
 device_folder = glob.glob(base_dir + '28-00000607001b')[0]

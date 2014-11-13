@@ -15,7 +15,11 @@
 	<Temp_Sensor_Id>28-00000607001b</Temp_Sensor_Id>
 	<Heat_Pin>27</Heat_Pin>
 	<Temp_Sensor_Id>28-000006074526</Temp_Sensor_Id>
+<<<<<<< HEAD
 	<Heat_Pin>10</Heat_Pin>
+=======
+	<Heat_Pin>23</Heat_Pin>
+>>>>>>> upstream/master
 	<!-- Up to 2 GPIO pins are supported but can easily be expanded in code-->
 	<!-- Repeat <GPIO_Pin> element name -->
 	<GPIO_Pin>22</GPIO_Pin>

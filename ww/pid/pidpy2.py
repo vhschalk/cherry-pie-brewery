@@ -8,7 +8,7 @@ class pidpy(object):
     yk_2 = 0.0  # y[k-2] = Gamma[k-1]
     lpf_1 = 0.0 # lpf[k-1] = LPF output[k-1]
     lpf_2 = 0.0 # lpf[k-2] = LPF output[k-2]
-    
+
     yk = 0.0 # output
     
     GMA_HLIM = 100.0
@@ -38,47 +38,9 @@ class pidpy(object):
         self.k1 = self.kc * self.td / self.ts
         self.lpf1 = (2.0 * self.k_lpf - self.ts) / (2.0 * self.k_lpf + self.ts)
         self.lpf2 = self.ts / (2.0 * self.k_lpf + self.ts) 
-        
-    def calcPID_reg3(self, xk, tset, enable):
-        ek = 0.0
-        lpf = 0.0
-        ek = tset - xk # calculate e[k] = SP[k] - PV[k]
-        #--------------------------------------
-        # Calculate Lowpass Filter for D-term
-        #--------------------------------------
-        lpf = self.lpf1 * pidpy.lpf_1 + self.lpf2 * (ek + pidpy.ek_1);
-        
-        if (enable):
-            #-----------------------------------------------------------
-            # Calculate PID controller:
-            # y[k] = y[k-1] + kc*(e[k] - e[k-1] +
-            # Ts*e[k]/Ti +
-            # Td/Ts*(lpf[k] - 2*lpf[k-1] + lpf[k-2]))
-            #-----------------------------------------------------------
-            self.pp = self.kc * (ek - pidpy.ek_1) # y[k] = y[k-1] + Kc*(PV[k-1] - PV[k])
-            self.pi = self.k0 * ek  # + Kc*Ts/Ti * e[k]
-            self.pd = self.k1 * (lpf - 2.0 * pidpy.lpf_1 + pidpy.lpf_2)
-            pidpy.yk += self.pp + self.pi + self.pd
-        else:
-            pidpy.yk = 0.0
-            self.pp = 0.0
-            self.pi = 0.0
-            self.pd = 0.0
-        
-        pidpy.ek_1 = ek # e[k-1] = e[k]
-        pidpy.lpf_2 = pidpy.lpf_1 # update stores for LPF
-        pidpy.lpf_1 = lpf
-            
-        # limit y[k] to GMA_HLIM and GMA_LLIM
-        if (pidpy.yk > pidpy.GMA_HLIM):
-            pidpy.yk = pidpy.GMA_HLIM
-        if (pidpy.yk < pidpy.GMA_LLIM):
-            pidpy.yk = pidpy.GMA_LLIM
-            
-        return pidpy.yk
-                          
+
+
     def calcPID_reg4(self, xk, tset, enable):
-        ek = 0.0
         ek = tset - xk # calculate e[k] = SP[k] - PV[k]
         
         if (enable):

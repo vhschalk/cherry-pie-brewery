@@ -2,20 +2,20 @@ import RPi.GPIO as GPIO
 import time
  
 GPIO.setmode(GPIO.BCM)
- 
-enable_pin = 18
-coil_A_1_pin = 4
-coil_A_2_pin = 17
-coil_B_1_pin = 23
-coil_B_2_pin = 24
- 
-GPIO.setup(enable_pin, GPIO.OUT)
+
+#enable_pin = 18
+coil_A_1_pin = 14 #4 pink
+coil_A_2_pin = 15 #17 orange
+coil_B_1_pin = 18 #23 blue
+coil_B_2_pin = 23 #24 yellow
+
+#GPIO.setup(enable_pin, GPIO.OUT)
 GPIO.setup(coil_A_1_pin, GPIO.OUT)
 GPIO.setup(coil_A_2_pin, GPIO.OUT)
 GPIO.setup(coil_B_1_pin, GPIO.OUT)
 GPIO.setup(coil_B_2_pin, GPIO.OUT)
  
-GPIO.output(enable_pin, 1)
+#GPIO.output(enable_pin, 1)
  
 def forward(delay, steps):
     for i in range(0, steps):

@@ -9,8 +9,8 @@ GPIO.setmode(GPIO.BCM) # use real GPIO numbering
 GPIO.setup(17,GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
 if GPIO.input(17):
-	print("flow")
-else:
 	print("no flow")
+else:
+	print("flow")
 
 GPIO.cleanup()

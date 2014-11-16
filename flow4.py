@@ -2,11 +2,12 @@ import os # importing OS module just in-case needed
 import time # Importing Time module
 import RPi.GPIO as gpio # Importing RPIO module as gpio
 
+FLOW_SENSOR = 23
 
 # Initializing GPIO ports
 boardRevision = gpio.RPI_REVISION # Clearing previous gpio port settings
 gpio.setmode(gpio.BCM) # Use real physical gpio port numbering
-gpio.setup(17, gpio.IN, pull_up_down=gpio.PUD_UP) # setting pin 22 as pull up resistor
+gpio.setup(FLOW_SENSOR, gpio.IN, pull_up_down=gpio.PUD_UP) # setting pin FLOW_SENSOR as pull up resistor
 
 
 def glycolFlow():
@@ -14,8 +15,8 @@ def glycolFlow():
   glycolErrorStopTime = glycolCurrentTime + 1
   glycolTimingPulse = 0
   while glycolCurrentTime <= glycolErrorStopTime:
-       if gpio.input(17) == True:
-            if gpio.input(17) == False:
+       if gpio.input(FLOW_SENSOR) == True:
+            if gpio.input(FLOW_SENSOR) == False:
                  glycolTimingPulse += 1
             else:
                  glycolCurrentTime = int(time.time())
@@ -30,8 +31,8 @@ def glycolFlow():
        glycolCount = 0
        #print 'glycol count', glycolCount
        while (glycolCount < 15) and (waitTimerCountglycol <= waitTimerglycol) :
-            if gpio.input(17) == True:
-                 if gpio.input(22) == False:
+            if gpio.input(FLOW_SENSOR) == True:
+                 if gpio.input(FLOW_SENSOR) == False:
                       glycolCount += 1
                       #print 'glycol count', glycolCount
                       waitTimerglycol = int(time.time()) + 1
@@ -44,7 +45,6 @@ def glycolFlow():
        if glycolCount == 15:
             glycolSecsPerLiters = glycolEndTime - glycolStartTime
             glycolLitersPerHour = (3600.0 / glycolSecsPerLiters) * 30
-            #glycolGalPerHour = glycolLitersPerHour * 0.26417205235815
             return glycolLitersPerHour
        else:
             glycolLitersPerHour = 0
@@ -55,4 +55,4 @@ def glycolFlow():
 
 while True:
   glycolLitersPerHour = glycolFlow()
-  print "flow =", glycolLitersPerHour, "l/Hour"
+  print "flow = ", glycolLitersPerHour, " l/Hour"

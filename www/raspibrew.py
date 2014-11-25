@@ -33,6 +33,7 @@ from flask import Flask, render_template, request, jsonify
 
 global parent_conn, parent_connB, parent_connC, statusQ, statusQ_B, statusQ_C
 global xml_root, template_name, pinHeatList, pinGPIOList
+global brewtime
 
 app = Flask(__name__, template_folder='templates')
 #url_for('static', filename='raspibrew.css')
@@ -177,6 +178,9 @@ def tempData1Wire(tempSensorId):
         temp_C = -99 #bad temp reading
         
     return temp_C
+
+def getbrewtime():
+    return (time.time() - brewtime)	
 
 # Stand Alone Get Temperature Process               
 def gettempProc(conn, myTempSensorNum):
@@ -336,6 +340,10 @@ def tempControlProc(myTempSensorNum, LCD, pinNum, readOnly, paramStatus, statusQ
 
         temp_ma = 0.0
 
+	#overwrite log file for new data log
+    	ff = open("brewery" + str(myTempSensorNum) + ".csv", "wb")
+        ff.close()
+
         while (True):
             readytemp = False
             while parent_conn_temp.poll(): #Poll Get Temperature Process Pipe
@@ -410,6 +418,9 @@ def tempControlProc(myTempSensorNum, LCD, pinNum, readOnly, paramStatus, statusQ
 
                 print "Current Temp: %3.2f deg %s, Heat Output: %3.1f%%" \
                                                         % (temp, tempUnits, duty_cycle)
+
+		logdata(myTempSensorNum, temp, duty_cycle)
+
                 readytemp == False
 
                 #if only reading temperature (no temp control)
@@ -473,16 +484,17 @@ def tempControlProc(myTempSensorNum, LCD, pinNum, readOnly, paramStatus, statusQ
                     parent_conn_heat.send([cycle_time, duty_cycle])
                 readyPOST = False
             time.sleep(.01)
+        
 
-        logdata(myTempSensorNum, cycle_time, tempUnits, duty_cycle)
-
-def logdata(tank,time,temp,heat):
-    f = open("brewery" + tank + ".csv", "ab")
-    f.write('{0.0} {0.00} {0.00}'.format(time,temp,heat))
+def logdata(tank, temp, heat):
+    f = open("brewery" + str(tank) + ".csv", "ab")
+    f.write("%3.1f;%3.3f;%3.3f\n" % (getbrewtime(), temp, heat))
     f.close()
 
 
 if __name__ == '__main__':
+
+    brewtime = time.time()
     
     os.chdir("/brewery/www")
      

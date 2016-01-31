@@ -6,21 +6,19 @@ This program will control an electric heating element in a vessel to set tempera
 
 For bootstrap multi-vessel and GPIO switch control version set template element to raspibrew_bootstrap.html in config.xml.  For original version set template to raspibrew.html.  The config.xml file explains how to setup for one, two or three vessels.  The number of vessels and GPIO switches can easily be expanded in the software.  The same raspibrew.py code supports both versions.    
 
-RasPiBrew Webpage:  
-[http://raspibrew.com](http://raspibrew.com)  
 Hardware and Software Setup Information:  
-[http://raspibrew.com/setup/](http://raspibrew.com/setup/)  
+[http://steve71.github.io/RasPiBrew/](http://steve71.github.io/RasPiBrew/)  
 
 ## Bootstrap Web Interface in Firefox Browser
-<img src="https://github.com/steve71/RasPiBrew/raw/master/img/raspibrew_bootstrap.png" alt=""/>
+<img src="https://github.com/steve71/RasPiBrew/raw/images/raspibrew_bootstrap.png" alt=""/>
 ## Original Web Interface in Firefox Browser
-<img src="https://github.com/steve71/RasPiBrew/raw/master/img/PID_Tuning.png" alt="" width="954 height="476.5" /> 
+<img src="https://github.com/steve71/RasPiBrew/raw/images/PID_Tuning.png" alt="" width="954 height="476.5" /> 
 
 ----------
 
 ## Setting to 120 deg F
 
-![](https://github.com/steve71/RasPiBrew/raw/master/img/PID_Temp_Control.png)  
+![](https://github.com/steve71/RasPiBrew/raw/images/PID_Temp_Control.png)  
 The temp plot shows temperature in degrees F over time in seconds.  
 The heat plot shows duty cycle percentage over time in seconds.
 
@@ -47,7 +45,7 @@ jQuery and two jQuery plugins (jsGauge and Flot) are used in the client:
 
 The PID algorithm was translated from C code to Python.  The C code was from "PID Controller Calculus with full C source source code" by Emile van de Logt
 An explanation on how to tune it is from the following web site:  
-[http://www.vandelogt.nl/htm/regelen_pid_uk.htm](http://www.vandelogt.nl/htm/regelen_pid_uk.htm)  
+[http://www.vandelogt.nl/nl_regelen_pid.php](http://www.vandelogt.nl/nl_regelen_pid.php)  
 
 The PID can be tuned very simply via the Ziegler-Nichols open loop method.  Just follow the directions in the controller interface screen, highlight the sloped line in the temperature plot and the parameters are automatically calculated.  After tuning with the Ziegler-Nichols method the parameters still needed adjustment because there was an overshoot of about 2 degrees in my system. I did not want the temperature to go past the setpoint since it takes a long time to come back down. Therefore, the parameters were adjusted to eliminate the overshoot.  For this particular system the Ti term was more than doubled and the Td parameter was set to about a quarter of the open loop calculated value.  Also a simple moving average was used on the temperature data that was fed to the PID controller to help improve performance.  Tuning the parameters via the Integral of Time weighted Absolute Error (ITAE-Load) would provide the best results as described on van de Logt's website above.
 
